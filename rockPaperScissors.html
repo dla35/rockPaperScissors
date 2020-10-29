@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Rock Paper Scissors Game</title>
+</head>
+
+<script>
+    
+    /* Create a function named computerPlay which will randomly select one of the following three choices: ['Rock', 'Paper', 'Scissors'] and which will return the selected choice*/
+    /* The Math.floor object rounds down any decimals. Math.random returns a random number between 0 & 1 (exclusive). eg 0.999 * 3 (length of array) = 2.999 = 2 */ 
+
+    function computerPlay() {
+        let choices = ['rock', 'paper', 'scissors'];/* Create a variable which has the three choices. */
+        computerChoice = choices[Math.floor( (Math.random() * choices.length))];
+        return computerChoice;
+    }
+
+    /* Create a function named humanPlay which prompts a human to select between the same three choices and stores the selected choice. The result should be case insensitive */
+    function humanPlay() {
+        humanChoice = prompt('Please choose and write from "Rock", "Paper" or "Scissors"').toLowerCase();
+        return humanChoice;
+    }
+
+    /* Create a function named game with the parameters computerPlay & humanPlay which will assess whether the computerPlay or the humanPlay won or drew a single game
+    based on the rock paper scissors rules.*/ 
+    function game(computerPlay, humanPlay) {
+        computerChoice = computerPlay();
+        humanChoice = humanPlay();
+        switch(computerChoice + humanChoice) {
+            case "rockrock":
+            case "paperpaper":
+            case "scissorsscissors":
+                return "Draw";
+                break;
+            case "rockpaper":
+            case "paperscissors":
+            case "scissorsrock":
+                return "Human wins";
+                break;
+            case "rockscissors":
+            case "paperrock":
+            case "scissorspaper":
+                return "Computer wins";
+                break;
+        
+        }
+    }
+    /* Create a function which lets you play a chosen (assignment said 5 but will let the user choose) number of rounds. The function should tally the wins 
+    and losses for both human and computer and declare a winner or loser or a tie at the end of the last round. */
+    function gamePlay(numberRounds) {
+        let humanWins = 0;
+        let computerWins = 0;
+        let Draw = 0;
+
+        for (let i = 0; i < numberRounds; i++) {
+            round = i+1;
+            
+            let gameResults = game(computerPlay, humanPlay);
+            console.log("Round "+ round + "\n" + "Human plays " + humanChoice + " : Computer plays " + computerChoice + " \n" + gameResults );
+
+            if (gameResults === "Human wins") {
+                humanWins++;
+            }
+            else if (gameResults === "Computer wins") {
+                computerWins++;
+            }
+            else if (gameResults === "Draw") {
+                Draw++;
+            }
+        }  
+
+        if (humanWins > computerWins) {
+            return ("Human Wins " + humanWins + " - " + computerWins )
+        }
+        else if (computerWins > humanWins) {
+            return ("Computer Wins " + computerWins + " - " + humanWins)
+        }
+        else {
+            return ("Match Drawn - Play again")
+        }
+
+    }
+   console.log(gamePlay(5))
+
+    /*This will be repeated 5 times with the scores tallied and displayed in the console*/
+
+
+</script>
+
+
+</html>
